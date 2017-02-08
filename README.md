@@ -19,20 +19,17 @@ to Jekyll.  Full usage information is at the bottom of the page
 
 ## Topics:
 
-1. [Getting Started with OpenRefine](00-getting-started.html)
-2. [Working with OpenRefine - faceting, clustering &
-splitting](01-working-with-openrefine.html)
-3. [Scripts](02-scripts.html)
-4. [Saving and Exporting Projects and Files](03-save-export.html)
+1. [Topic 1](00-getting-started.html)
+2. [Topic 2](01-working-with-openrefine.html)
+3. [Topic 3](02-scripts.html)
+4. [Topic 4](03-save-export.html)
 
 #### Optional
-- [Using Services with OpenRefine](04-services.html)
+- [Topic 5](04-services.html)
 
 ## Data
 
-Data files for the lesson are available here: [{{page.dataurl
-%}}]({{page.dataurl %}})
-
+Data files for the lesson are available here: 
 
 ## Requirements
 
@@ -42,10 +39,7 @@ workflow.
 *These lessons assume no prior knowledge of the skills or tools*, but working
 through this lesson requires working copies of the software described below.
 To most effectively use these materials, please make sure to install everything
-*before* working through this lesson.
-
-<p><strong>Twitter</strong>: @authorcarpentry                                                                                                                                                                                                                                                                              
-~                                              
+*before* working through this lesson.                    
 
 ## Using this template
 
