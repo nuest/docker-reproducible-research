@@ -34,7 +34,7 @@ Data files for the lesson are available here: [{{page.dataurl
 %}}]({{page.dataurl %}})
 
 
-### Requirements
+## Requirements
 
 Author Carpentry's teaching is hands-on, so participants are encouraged to use
 their own computers to insure the proper setup of tools for an efficient
@@ -49,6 +49,8 @@ To most effectively use these materials, please make sure to install everything
 
 ## Using this template
 
+### Copying this template
+
 If you want to generate a new Author Carpentry lesson, use the Github import
 feature.  Click the + sign in the upper right corner of the Github window, next
 to your user account logo.  Select "Import a Repository".  For the URL enter
@@ -61,27 +63,30 @@ of forking because Github doesn't allow multiple forks under the same owner.
 If you're developing an independent lesson in your account, feel free to use
 Fork instead.
 
-## Modifying the template for a new lesson.
+### Modifying this template for a new lesson
 
-1. Download and install mkpage from https://github.com/caltechlibrary/mkpage
-2. Clone a copy of the repository to your local machine
-3. Edit README.md - when you're ready you should delete this text
-4. Edit CONTRIBUTORS as appropriate
-5. Add topic .md files in repository with leading numbers like: 00-topic1.md;
+Set up
+- Download and install mkpage from https://github.com/caltechlibrary/mkpage
+- Clone a copy of the repository to your local machine.  You can use the GitHub
+Desktop application or the command line command using 
+'git clone https://github.com/AuthorCarpentry/lesson-name'
+
+Add Content
+- Edit README.md with information about this lesson
+- Add individual .md files with lesson content in repository with leading numbers like: 00-topic1.md;
 01-topic2.md
-6. Edit nav.md to set links in the navigation bar
-lesson
-7. In your terminal, type ./mk-website
-8. To preview the lesson, type ws and point your web browser to
+- Edit nav.md to set links in the navigation bar
+- Edit CONTRIBUTORS as appropriate
+
+View Lesson
+- In your terminal, type ./mk-website to generate .html files
+- To preview the lesson, type ws and point your web browser to
 http://localhost:8000/.  
-9. When you're happy with the lesson, type ./publish_website to send changes to
-github
+- When you're happy with the lesson, type ./publish_website to send changes to
+github (script does a git commit and git push)
 
 
-##Modifying template for a workshop containing multiple lessons
-
-1. 
-
+## Modifying template for a workshop containing multiple lessons
 
 ### Optional-Importing new changes from the template
 
