@@ -69,17 +69,17 @@ Desktop application or the command line command using
 Add Content
 
 * Edit README.md with information about this lesson
-* Add individual .md files with lesson content in repository with leading numbers like: 00-topic1.md;
+* Add individual .md files with lesson topics in repository with leading numbers like: 00-topic1.md;
 01-topic2.md
 * Edit nav.md to set links in the navigation bar
 * Edit CONTRIBUTORS as appropriate
 
 View Lesson
 
-* In your terminal, type ./mk-website to generate .html files
+* In your terminal, type ./mk-website.bash to generate .html files
 * To preview the lesson, type ws and point your web browser to
 http://localhost:8000/.  
-* When you're happy with the lesson, type ./publish_website to send changes to
+* When you're happy with the lesson, type ./publish_website.bash to send changes to
 github (script does a git commit and git push)
 
 
