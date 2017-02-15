@@ -16,6 +16,11 @@ to Jekyll.  Full usage information is at the bottom of the page.
 
 **Lesson status: In Development**
 
+## Learning Objectives:
+
+- One
+- Two
+
 ## Topics:
 
 1. [Topic 1](00-getting-started.html)
