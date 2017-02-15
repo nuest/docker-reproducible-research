@@ -4,7 +4,7 @@ Author Carpentry : Lesson Template
 A description of the lesson goes here.  If you're reading this on the github
 repo, you see the rendered lesson at:
 
-http://authorcarpentry.github.io/lesson-template-mkpage
+http://authorcarpentry.github.io/lesson-template
 
 This template is inspired by the software and data carpentry templates, 
 but it employs the the mkpage site generation tool as an alternative
@@ -73,7 +73,6 @@ Add Content
 * Add individual .md files with lesson topics in repository with leading numbers like: 00-topic1.md;
 01-topic2.md
 * Edit nav.md to set links in the navigation bar
-* Edit CONTRIBUTORS as appropriate
 
 View Lesson
 
