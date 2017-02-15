@@ -7,7 +7,7 @@ repo, you see the rendered lesson at:
 http://authorcarpentry.github.io/lesson-template
 
 This template is inspired by the software and data carpentry templates, 
-but it employs the the mkpage site generation tool as an alternative
+but it employs the mkpage site generation tool as an alternative
 to Jekyll.  Full usage information is at the bottom of the page.
 
 **Content Contributors: Name **
