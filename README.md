@@ -10,11 +10,9 @@ This template is inspired by the software and data carpentry templates,
 but it employs the mkpage site generation tool as an alternative
 to Jekyll.  Full usage information is at the bottom of the page.
 
-**Content Contributors: Name **
+*Content Contributors: Name*
 
-
-**Lesson Maintainers: Name **
-
+*Lesson Maintainers: Name*
 
 **Lesson status: In Development**
 
