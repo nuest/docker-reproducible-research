@@ -75,5 +75,5 @@ guidelines:
 ## FAQ
 
 *   *Where can I get help?*
-    <br/>
-    Mail us at [a@a.org](mailto:a@a.org)
+
+    Mail us at [authorcarpentry@library.caltech.edu](mailto:authorcarpentry@library.caltech.edu)
