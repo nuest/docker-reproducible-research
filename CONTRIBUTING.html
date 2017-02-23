@@ -51,7 +51,7 @@ or <code>adding-tutorial-on-visualization</code>.</p></li>
 <li><p>Clone this repository and branch to work with it on your computer.<br />
 git clone the repository with -b &lsquo;branch name&rsquo;</p></li>
 
-<li><p>Make your changes, commit them, and push them to your repository on GitHub.</p></li>
+<li><p>Make your changes, render, commit them, and push them to your repository on GitHub.</p></li>
 
 <li><p>Send a pull request to the <code>gh-pages</code> branch of the main datacarpentry
 repository at <a href="http://github.com/authorcarpentry/lesson-name">http://github.com/authorcarpentry/lesson-name</a>. This can
@@ -60,7 +60,7 @@ be done through the github web interface.</p></li>
 
 <p>If it is easier for you to send them to us some other way,
 please mail us at
-<a href="mailto:m@m.org">m@m.org</a>.
+<a href="mailto:authorcarpentry@library.caltech.edu">authorcarpentry@library.caltech.edu</a>.
 Given a choice between you creating content or wrestling with Git,
 we&rsquo;d rather have you doing the former.</p>
 
@@ -73,35 +73,29 @@ introduction to the shell for ecology contains the files <code>00-intro.md</code
 key to ensure files
 appear in the right order when listed.)</p>
 
-<p>Lessons may be written in Markdown, as IPython Notebooks, or in other formats.
-However, as explained in <a href="README.md">the README file</a>, Jekyll (the tool GitHub
-uses to create websites) only knows how to handle Markdown and HTML.  if some
-other format is used, the author of the lesson must add the generated Markdown
-to the repository.  This ensures that people who <em>aren&rsquo;t</em> familiar with some
-format don&rsquo;t have to install the tools needed to work with it (e.g., R
-programmers don&rsquo;t have to install the IPython Notebook).</p>
+<p>All lesson content is written in markdown.
+We use <a href="https://github.com/caltechlibrary/mkpage">mkpage</a> to render lesson
+content, which should be done on your local machine.  You render content by
+typing &lsquo;./mk-website.bash&rsquo; once you&rsquo;re finishing making edits.</p>
 
-<blockquote>
-<p>If a lesson is in a format we don&rsquo;t already handle, the author must also add
-something to the Makefile to re-create the Markdown from the source.  Please
-check with us if you plan to do this.</p>
-</blockquote>
+<p>You can use ws to view the content locally by typing &lsquo;ws&rsquo; and pointing your
+web browser to <a href="http://localhost:8000">http://localhost:8000</a></p>
 
 <h2>Formatting of the material</h2>
 
 <p>To ensure a consistent formatting of the lessons, we recommend the following
-guidelines:
-* No trailing white space
-* Wrap lines at 80 characters (unless it breaks URLs)
-* Use unclosed atx style headers (see below)</p>
+guidelines:</p>
+
+<ul>
+<li>No trailing white space</li>
+<li>Wrap lines at 80 characters (unless it breaks URLs)</li>
+</ul>
 
 <h2>FAQ</h2>
 
-<ul>
-<li><em>Where can I get help?</em>
-<br/>
-Mail us at <a href="mailto:a@a.org">a@a.org</a></li>
-</ul>
+<p><em>Where can I get help?</em></p>
+
+<p>Mail us at <a href="mailto:authorcarpentry@library.caltech.edu">authorcarpentry@library.caltech.edu</a></p>
 
 </section>
 
