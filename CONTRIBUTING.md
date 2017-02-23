@@ -30,7 +30,7 @@ agrees to abide by our [code of conduct](CONDUCT.md).
 3.  Clone this repository and branch to work with it on your computer.  
     git clone the repository with -b 'branch name'
 
-4.  Make your changes, commit them, and push them to your repository on GitHub.
+4.  Make your changes, render, commit them, and push them to your repository on GitHub.
 
 5.  Send a pull request to the `gh-pages` branch of the main datacarpentry
     repository at http://github.com/authorcarpentry/lesson-name. This can
@@ -38,7 +38,7 @@ agrees to abide by our [code of conduct](CONDUCT.md).
 
 If it is easier for you to send them to us some other way,
 please mail us at
-[m@m.org](mailto:m@m.org).
+[authorcarpentry@library.caltech.edu](mailto:authorcarpentry@library.caltech.edu).
 Given a choice between you creating content or wrestling with Git,
 we'd rather have you doing the former.
 
@@ -51,29 +51,25 @@ introduction to the shell for ecology contains the files `00-intro.md`,
 key to ensure files
 appear in the right order when listed.)
 
-Lessons may be written in Markdown, as IPython Notebooks, or in other formats.
-However, as explained in [the README file](README.md), Jekyll (the tool GitHub
-uses to create websites) only knows how to handle Markdown and HTML.  if some
-other format is used, the author of the lesson must add the generated Markdown
-to the repository.  This ensures that people who *aren't* familiar with some
-format don't have to install the tools needed to work with it (e.g., R
-programmers don't have to install the IPython Notebook).
+All lesson content is written in markdown.
+We use [mkpage](https://github.com/caltechlibrary/mkpage) to render lesson
+content, which should be done on your local machine.  You render content by
+typing './mk-website.bash' once you're finishing making edits.
 
-> If a lesson is in a format we don't already handle, the author must also add
-> something to the Makefile to re-create the Markdown from the source.  Please
-> check with us if you plan to do this.
-
+You can use ws to view the content locally by typing 'ws' and pointing your
+web browser to http://localhost:8000
 
 ## Formatting of the material
 
 To ensure a consistent formatting of the lessons, we recommend the following
 guidelines:
-* No trailing white space
-* Wrap lines at 80 characters (unless it breaks URLs)
-* Use unclosed atx style headers (see below)
+
+- No trailing white space
+- Wrap lines at 80 characters (unless it breaks URLs)
+
 
 ## FAQ
 
-*   *Where can I get help?*
+*Where can I get help?*
 
-    Mail us at [authorcarpentry@library.caltech.edu](mailto:authorcarpentry@library.caltech.edu)
+Mail us at [authorcarpentry@library.caltech.edu](mailto:authorcarpentry@library.caltech.edu)     
