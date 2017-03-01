@@ -55,7 +55,7 @@ a Mac) and cd to the directory where you put the cloned repository.  Then type
 ```shell
     git remote add template https://github.com/AuthorCarpentry/lesson-template
     git fetch template
-    git merge template/gh-pages
+    git merge -s recursive -Xours -m "Merge in template changes" template/gh-pages
 ```
 
 This will pull information from the template and merge any changes into the
