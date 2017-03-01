@@ -38,11 +38,11 @@ be viewed independent from a web connection.   You'll need to download and insta
     
 4.  Make your changes to the .md files
 
-5.  Render your content by typing ./mk-website
+5.  Render your content by typing ./mk-website.bash
 
 6.  (Optional) View your changes locally by typing 'ws' and pointing your web browser to http://localhost:8000
 
-7.  Commit your changes and push them to your repository on GitHub.
+7.  Upload your changes to GitHub by typing ./publish.bash (Does a commit and push)
 
 8.  Send a pull request to the `gh-pages` branch of the main datacarpentry
     repository at http://github.com/authorcarpentry/lesson-name. This can
