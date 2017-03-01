@@ -17,6 +17,12 @@ and help you become a member of our community.
 Everyone involved in [Author Carpentry](http://authorcarpentry.github.io)
 agrees to abide by our [code of conduct](CONDUCT.md).
 
+## Editing Lesson Content
+
+All lesson content is written in markdown (.md) files.  We use [mkpage](https://github.com/caltechlibrary/mkpage) 
+to render lesson content into .html pages.  While GitHub can render content, we use mkpage so lesson content can
+be viewed independent from a web connection.   You'll need to download and install mkpage before adding content.
+
 ## Working With GitHub
 
 1.  Fork the `authorcarpentry/lesson-name` repository on GitHub.  
@@ -29,16 +35,21 @@ agrees to abide by our [code of conduct](CONDUCT.md).
 
 3.  Clone this repository and branch to work with it on your computer.  
     git clone the repository with -b 'branch name'
+    
+4.  Make your changes to the .md files
 
-4.  Make your changes, render, commit them, and push them to your repository on GitHub.
+5.  Render your content by typing ./mk-website
 
-5.  Send a pull request to the `gh-pages` branch of the main datacarpentry
+6.  (Optional) View your changes locally by typing 'ws' and pointing your web browser to http://localhost:8000
+
+7.  Commit your changes and push them to your repository on GitHub.
+
+8.  Send a pull request to the `gh-pages` branch of the main datacarpentry
     repository at http://github.com/authorcarpentry/lesson-name. This can
     be done through the github web interface. 
 
 If it is easier for you to send them to us some other way,
-please mail us at
-[authorcarpentry@library.caltech.edu](mailto:authorcarpentry@library.caltech.edu).
+please mail us at [authorcarpentry@library.caltech.edu](mailto:authorcarpentry@library.caltech.edu).
 Given a choice between you creating content or wrestling with Git,
 we'd rather have you doing the former.
 
@@ -50,14 +61,6 @@ introduction to the shell for ecology contains the files `00-intro.md`,
 `01-filedir.md` and so on.  (We use two digits followed by a one-word topic 
 key to ensure files
 appear in the right order when listed.)
-
-All lesson content is written in markdown.
-We use [mkpage](https://github.com/caltechlibrary/mkpage) to render lesson
-content, which should be done on your local machine.  You render content by
-typing './mk-website.bash' once you're finishing making edits.
-
-You can use ws to view the content locally by typing 'ws' and pointing your
-web browser to http://localhost:8000
 
 ## Formatting of the material
 
