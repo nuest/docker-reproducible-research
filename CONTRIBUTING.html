@@ -37,6 +37,12 @@ and help you become a member of our community.
 Everyone involved in <a href="http://authorcarpentry.github.io">Author Carpentry</a>
 agrees to abide by our <a href="CONDUCT.md">code of conduct</a>.</p>
 
+<h2>Editing Lesson Content</h2>
+
+<p>All lesson content is written in markdown (.md) files.  We use <a href="https://github.com/caltechlibrary/mkpage">mkpage</a>
+to render lesson content into .html pages.  While GitHub can render content, we use mkpage so lesson content can
+be viewed independent from a web connection.   You&rsquo;ll need to download and install mkpage before adding content.</p>
+
 <h2>Working With GitHub</h2>
 
 <ol>
@@ -51,7 +57,13 @@ or <code>adding-tutorial-on-visualization</code>.</p></li>
 <li><p>Clone this repository and branch to work with it on your computer.<br />
 git clone the repository with -b &lsquo;branch name&rsquo;</p></li>
 
-<li><p>Make your changes, render, commit them, and push them to your repository on GitHub.</p></li>
+<li><p>Make your changes to the .md files</p></li>
+
+<li><p>Render your content by typing ./mk-website</p></li>
+
+<li><p>(Optional) View your changes locally by typing &lsquo;ws&rsquo; and pointing your web browser to <a href="http://localhost:8000">http://localhost:8000</a></p></li>
+
+<li><p>Commit your changes and push them to your repository on GitHub.</p></li>
 
 <li><p>Send a pull request to the <code>gh-pages</code> branch of the main datacarpentry
 repository at <a href="http://github.com/authorcarpentry/lesson-name">http://github.com/authorcarpentry/lesson-name</a>. This can
@@ -59,8 +71,7 @@ be done through the github web interface.</p></li>
 </ol>
 
 <p>If it is easier for you to send them to us some other way,
-please mail us at
-<a href="mailto:authorcarpentry@library.caltech.edu">authorcarpentry@library.caltech.edu</a>.
+please mail us at <a href="mailto:authorcarpentry@library.caltech.edu">authorcarpentry@library.caltech.edu</a>.
 Given a choice between you creating content or wrestling with Git,
 we&rsquo;d rather have you doing the former.</p>
 
@@ -72,14 +83,6 @@ introduction to the shell for ecology contains the files <code>00-intro.md</code
 <code>01-filedir.md</code> and so on.  (We use two digits followed by a one-word topic
 key to ensure files
 appear in the right order when listed.)</p>
-
-<p>All lesson content is written in markdown.
-We use <a href="https://github.com/caltechlibrary/mkpage">mkpage</a> to render lesson
-content, which should be done on your local machine.  You render content by
-typing &lsquo;./mk-website.bash&rsquo; once you&rsquo;re finishing making edits.</p>
-
-<p>You can use ws to view the content locally by typing &lsquo;ws&rsquo; and pointing your
-web browser to <a href="http://localhost:8000">http://localhost:8000</a></p>
 
 <h2>Formatting of the material</h2>
 
