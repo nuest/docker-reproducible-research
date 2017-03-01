@@ -141,11 +141,9 @@ section {
      min-height: 84%;
      color: black;
      background-color: white;
-     margin: 0;
-     padding-top 0;
-     padding-bottom: 2em;
-     padding-left: 1em;
-     padding-right: 0;
+     margin-left: 1em;
+     margin-bottom: 2em;
+     padding 0;
 }
 
 section h1 {
