@@ -25,7 +25,8 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 4. [Transfer and archive of containers](03-transfer-and-archive.html)
 
 ### Optional
-1. [More geospatial tools in containers](04-geocontainers.html)
+
+- [More geospatial tools in containers](04-geocontainers.html)
 
 <!--
 ## Data
