@@ -26,6 +26,7 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 
 ### Optional
 
+- [Templates for reproducible research](05-templates.html)
 - [More geospatial tools in containers](04-geocontainers.html)
 
 <!--
