@@ -35,6 +35,14 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 Data files for the lesson are available here: 
 -->
 
+## Scope of this lesson
+
+This lesson provides a rather _"raw and manual"_ approach to creating reproducible packages of data, code, and the required runtime environment.
+Making this potentially tedious process more comfortable and ideally automatic for users is an active field of research, see for example the [Executable Research Compendium](http://dx.doi.org/10.1045/january2017-nuest) by the [o2r project](http://o2r.info), and tools such as [ReproZip](http://reprozip.org/).
+Naturally understanding in depth how reproducibility can be achieved provides a clear advantage over simply using a white box (the existing tools are all open, so there is no black box).
+Therefore this lesson's contents on concepts or containerization/virtualization and the leading open source tool are surely worth knowing, even when using supporting tools and services.
+This also makes this topic suitable for a generic audience interested in Author Carpentry.
+
 ## Requirements
 
 Author Carpentry's teaching is hands-on, so participants are encouraged to use their own computers to insure the proper setup of tools for an efficient workflow.
