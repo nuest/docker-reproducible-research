@@ -40,15 +40,80 @@
 
 <h2>Recap: Image vs. container</h2>
 
+<p>An image is a blueprint for a container.
+A container is an instance of an image.
+A container can divert from the image during its lifetime.</p>
+
 <h2>Save a Docker image</h2>
+
+<pre><code class="language-bash">docker save --output articles-wordcloud.tar authorcarpentry-docker-articles
+ls *.tar
+</code></pre>
+
+<p>We use the <code>--output</code> option to save the image to a file.</p>
+
+<p>You can learn more about the <a href="https://docs.docker.com/engine/reference/commandline/save/"><code>save</code> command on Docker Docs</a>.</p>
+
+<p><em>What does this mean for reproducible research?</em></p>
+
+<p>Images are nice because there is a dual relationship between the Dockerfile used to build the image and the image itself.
+However, it requires additional work to create a matching image when you work <em>inside</em> the container.</p>
 
 <h2>Export a container</h2>
 
-<h2>Image and container labels</h2>
+<p>If you choose to manually manipulate a container, or include results of some processing, then you will export a container.</p>
+
+<pre><code class="language-bash"># find out the container ID
+docker ps -a
+
+docker save --output articles-wordcloud.tar authorcarpentry-docker-articles
+ls *.tar
+tar -tvf articles-wordcloud.tar
+</code></pre>
+
+<p>You can learn more about the <a href="https://docs.docker.com/engine/reference/commandline/export/"><code>export</code> command on Docker Docs</a>.</p>
+
+<p><em>What does this mean for reproducible research?</em></p>
+
+<p>You should be careful when exporting containers, because you lack the metadata/documentation of the Dockerfile.</p>
+
+<h2>Labels for images and containers</h2>
+
+<p>Docker provides <em>labels</em> to add custom metadata to images and containers.
+You can use it to provide information that helps you and others to</p>
+
+<p>We can add labels to images by using the <code>LABEL</code> instructions in the Dockerfile.</p>
+
+<pre><code class="language-Dockerfile">FROM rocker/rstudio
+
+LABEL name=my_image_for_research \
+    author=Daniel
+</code></pre>
+
+<p>We can add labels when starting a container.</p>
+
+<pre><code class="language-bash">$ docker run -it --label experiment_run_numer=42 authorcarpentry-docker-articles
+
+# find out container name
+docker ps -a
+
+# print out the label using inspect
+docker inspect jolly_euclid | grep experiment
+</code></pre>
+
+<p>These labels will still be there after exporting and importing.</p>
+
+<p>You can learn more about <a href="https://docs.docker.com/engine/userguide/labels-custom-metadata/">labelling and custom metadata in the Docker docs</a> and about the <a href="https://docs.docker.com/engine/reference/commandline/inspect"><code>inspect</code> command</a>.</p>
 
 <h2>Archiving a Docker image or container</h2>
 
-<h2>Loading and importing images and containers</h2>
+<p>You can now upload the <a href="https://en.wikipedia.org/wiki/Tar_(computing)">tarball</a> to a data repository, such as <a href="http://figshare.com/">figshare</a> or <a href="http://zenodo.org/">Zenodo</a>, get a <a href="https://en.wikipedia.org/wiki/Digital_object_identifier">DOI</a> and cite it in your work.</p>
+
+<!--
+## Loading and importing images and containers
+
+...
+-->
 
 <!--
 Previous: [Scripts](02-scripts.html) Optional Next: [Services in OpenRefine](04-services.html)
