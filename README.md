@@ -3,6 +3,7 @@ Author Carpentry : Docker for reproducible research
 
 Reproducibility of computational results is crucial in modern algorithm-based research.
 In this lesson, we introduce Docker as a useful tool to (a) document your computational environment, and (b) make a computational environment transferable across machines and thus archivable.
+The intention of this course is to showcase Docker as a useful tool for scientists, even if they are _not_ regular users of the command line, which this course is completely based on.
 
 *Content Contributors: Daniel N&uuml;st*
 
@@ -16,6 +17,7 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 - RStudio in a container
 - Jupyter Notebook in a container
 - Archival of software and runtime environments with Docker
+- Creating reproducible runtime environments from manifests
 
 ## Topics:
 
@@ -23,6 +25,7 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 2. [RStudio in a Docker container](01-rstudio-in-container.html)
 3. [Jupyter in a Docker container](02-jupyter-in-container.html)
 4. [Transfer and archive of containers](03-transfer-and-archive.html)
+4. [Create an image from a Dockerfile](06-dockerfile.html)
 
 ### Optional
 
@@ -50,6 +53,6 @@ Author Carpentry's teaching is hands-on, so participants are encouraged to use t
 To most effectively use these materials, please make sure to install everything *before* working through this lesson.                    
 
 - [Docker](https://www.docker.com/get-docker)
-- editor with highlighting for Dockerfiles, e.g. [vscode](https://code.visualstudio.com/).
-- [Docker ID](https://hub.docker.com/register/) for an account on [Docker Hub](https://hub.docker.com/)
-- [GitHub account](https://github.com/join)
+- editor with highlighting, e.g. [vscode](https://code.visualstudio.com/)
+<!-- - [Docker ID](https://hub.docker.com/register/) for an account on [Docker Hub](https://hub.docker.com/) -->
+<!-- - [GitHub account](https://github.com/join) -->

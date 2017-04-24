@@ -15,6 +15,7 @@
 <li><a href="01-rstudio-in-container.html">RStudio</a></li>
 <li><a href="02-jupyter-in-container.html">Jupyter</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
+<li><a href="06-dockerfile.html">Dockerfile</a></li>
 <li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
 </ul>
 
@@ -23,25 +24,93 @@
 <section>
 <h1>RStudio in a Docker container</h1>
 
-<p>10 minutes</p>
+<p>5 minutes</p>
 
 <hr />
 
 <h2>Learning Objectives</h2>
 
 <ul>
-<li>&hellip;</li>
+<li>start RStudio in a container</li>
+<li>learn about Rocker image variants</li>
 </ul>
 
 <hr />
 
 <h2>Starting RStudio</h2>
 
-<p>&hellip;</p>
+<p><a href="http://rstudio.com/">RStudio</a> is a popular IDE for the <a href="http://r-project.org/">R</a> language and environment for statistical computing and graphics.</p>
+
+<p><a href="https://github.com/benmarwick">Ben Marwick</a> demonstrates in his <a href="https://github.com/benmarwick/1989-excavation-report-Madjebebe"><em>research compendium</em></a> how to use a containerised version of RStudio and why.
+In brief, he <em>only</em> used the container to develop an R package, which contains all of the computations for a scientific article he co-authored.</p>
+
+<blockquote>
+<p><em>I developed and tested the package on this Docker container, so this is the only platform that I&rsquo;m confident it works on, and so recommend to anyone wanting to use this package to generate the vignette, etc.</em></p>
+</blockquote>
+
+<p>By only working within the container, he created a transferable execution environment.
+His host operating system is free for experimentation and to be secure (e.g. installing a later library version) without risking the integrity of the combination of packages in the container.</p>
+
+<p>The <em>performance overhead</em> for running RStudion in a container is negligent for most use cases, unlike you might know from virtual machines (cf. <a href="https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#3">slides by B. Marwick</a>).</p>
+
+<p>Here is all you need to start it:</p>
+
+<pre><code class="language-bash">$ docker run -p 8787:8787 rocker/rstudio
+# stop the container with Ctrl+c
+</code></pre>
+
+<p>Using the CLI option <code>-p</code> we expose a <a href="https://en.wikipedia.org/wiki/Port_(computer_networking)">port</a> of the container to our host computer.</p>
+
+<p>No open the UI in your browser: <strong><a href="http://localhost:8787">http://localhost:8787</a></strong> and sign-in with rstudio/rstudio.
+You can install packages and run analyses now just as in your regular RStudio version, of course ideally by using <a href="https://authorcarpentry.github.io/executable-documents-rstudio/">executable documents with Markdown</a>.</p>
 
 <h2>Rocker images</h2>
 
-<p>about the different rocker images</p>
+<p>We use an image from the <a href="https://github.com/rocker-org/rocker">Rocker</a> organisation (see the <a href="http://dirk.eddelbuettel.com/blog/2014/10/23/">Rocker announcement for some background</a>).
+Rocker published different variants of images for R targeted at different use cases.</p>
+
+<p>They provide <strong>base images</strong>](<a href="https://github.com/rocker-org/rocker#base-docker-containers">https://github.com/rocker-org/rocker#base-docker-containers</a>) and also images with different collections of pre-installed packages, the <a href="https://github.com/rocker-org/rocker#use-cases"><strong>use case</strong></a> images.</p>
+
+<p>If you are a useR, these should get you started quickly.</p>
+
+<p><em>How is this useful for reproducible research?</em></p>
+
+<p>You can easily try out and compare different R versions using the <a href="https://hub.docker.com/r/rocker/r-ver/tags/"><code>r-ver</code></a> images.</p>
+
+<pre><code class="language-bash">$ docker run -it rocker/r-ver:3.1.0
+# [image download log]
+
+R version 3.1.0 (2014-04-10) -- &quot;Spring Dance&quot;
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+&gt; 1+1
+[1] 2
+&gt; q()
+</code></pre>
+
+<p>This gives you an interactive session of R in a specific version. Nice!
+You can leave the R session just as a regular R session by typing <code>quit()</code>.</p>
+
+<h2>More resources on Docker and R</h2>
+
+<ul>
+<li><a href="http://o2r.info/2016/12/15/investigating-docker-and-R/"><em>Investigating Docker and R</em></a> by the o2r project team (blog post)</li>
+<li><a href="https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#1"><em>Reproducible Research using Docker and R</em></a> by B.Marwick (presentation slides)</li>
+<li><a href="https://doi.org/10.1145/2723872.2723882"><em>An introduction to Docker for reproducible research</em></a> by Carl Boettiger (research article)</li>
+</ul>
 
 <!--
 Previous: [Getting Started with OpenRefine](00-getting-started.html)  Next: [Scripts from OpenRefine](02-scripts.html)

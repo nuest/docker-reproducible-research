@@ -15,21 +15,20 @@
 <li><a href="01-rstudio-in-container.html">RStudio</a></li>
 <li><a href="02-jupyter-in-container.html">Jupyter</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
+<li><a href="06-dockerfile.html">Dockerfile</a></li>
 <li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
 </ul>
 
 </nav>
 
 <section>
+<h1>Jupyter in Docker container</h1>
+
+<p>10 Minutes</p>
+
 <hr />
 
-<p>layout: lesson
-root: .
-title: Jupyter in Docker container</p>
-
-<h2>minutes: 5</h2>
-
-<h1>Learning Objectives</h1>
+<h2>Learning Objectives</h2>
 
 <ul>
 <li>User Jupyter Notebook started in a Docker container</li>
@@ -38,9 +37,70 @@ title: Jupyter in Docker container</p>
 
 <hr />
 
-<h1>Lesson</h1>
+<h2>Start container</h2>
 
-<p>&hellip;</p>
+<p>Many different Docker images exist for <a href="https://hub.docker.com/search/?isAutomated=0&amp;isOfficial=0&amp;page=1&amp;pullCount=0&amp;q=python&amp;starCount=0">Python</a>.
+In this lesson, we&rsquo;ll try out a <a href="https://jupyter.org/">Jupyter</a> image.</p>
+
+<blockquote>
+<p>The Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, machine learning and much more. <em><a href="https://jupyter.org/">https://jupyter.org/</a></em></p>
+</blockquote>
+
+<p>Jupyter images are available as different <a href="https://github.com/jupyter/docker-stacks">&ldquo;opinioned ready-to-run stacks&rdquo;</a>.</p>
+
+<pre><code class="language-bash">docker run -it --rm -p 8888:8888 jupyter/scipy-notebook:eb70bcf1a292
+# stop the container with Ctrl+c
+</code></pre>
+
+<p>In this case we use a new CLI option, <code>--rm</code> to remove the container right-away after it is closed
+Some housekeeping on container instances never hurts!
+We also use a specific <a href="https://hub.docker.com/r/jupyter/scipy-notebook/tags/">release tag</a> so we are reproducible.</p>
+
+<p>Open your browser at the URL provided in the console, e.g. <code>http://localhost:8888/?token=fce55...&lt;token string&gt;</code>, create a new notebook and start editing your Python code, or copy and paste an example from the <a href="https://cs231n.github.io/python-numpy-tutorial/">Numpy tutorial</a> or from <a href="http://matplotlib.org/gallery.html">Matplotlib</a> gallery.</p>
+
+<h2>Mount a directory from the host</h2>
+
+<p>To use files from your host computer and make data available in a container, you can mount volumes.
+This means you create a link between a directory on the host and a directory in the container.
+You can preserve work when containers are deleted, or between containers.</p>
+
+<p>This part of the lesson is based on the Data Carpentry course <a href="http://www.datacarpentry.org/python-ecology-lesson/01-starting-with-data/"><em>Python for ecologists: starting with data</em></a>.</p>
+
+<pre><code class="language-bash"># download a data file
+mkdir /tmp/author-carpentry-docker
+cd /tmp/authorcarpentry-docker
+wget -O lc-articles.zip https://ndownloader.figshare.com/files/5330251
+unzip lc-articles.zip
+
+# mount a volume when starting the container
+docker run -it --rm -p 8888:8888 -v /tmp/authorcarpentry-docker:/home/jovyan/work:rw jupyter/scipy-notebook:eb70bcf1a292
+</code></pre>
+
+<p>We use the <code>:rw</code> option, meaning we allow <code>r</code>eading and <code>w</code>writing from within the container, as oppossed to <code>ro</code> (read-only).</p>
+
+<p>Learn more about <a href="https://docs.docker.com/engine/tutorials/dockervolumes/#data-volumes">volume mounts in the Docker docs</a>.</p>
+
+<p>We can now load the mounted data in the notebook:</p>
+
+<pre><code class="language-Python">import pandas as pd
+pd.read_csv(&quot;articles.csv&quot;)
+</code></pre>
+
+<p><em>How is this useful for reproducible research?</em></p>
+
+<p>It is not, because we separate the data from the container, which is not self-consistent anymore.
+But mounting host volumes is useful for data input and output during development, and also for large datasets, which cannot easily be replicated multiple times on the same machine.</p>
+
+<h2>Next steps</h2>
+
+<p>If you have not used Jupyter notebooks before, but use Python scripts for your work, then you can of course also wrap a Python script and its dependencies in a container.
+There are a number of Python images available on the Docker Hub that can get you started.
+You can even make your script the containers default command and provide instructions to your script when running a container.</p>
+
+<ul>
+<li><a href="https://www.continuum.io/blog/developer-blog/anaconda-and-docker-better-together-reproducible-data-science">Blog post on RR with Anaconda</a></li>
+<li>&hellip;</li>
+</ul>
 
 <!--
 Previous: [Working with OpenRefine](01-working-with-openrefine.html)  Next: [Saving and Exporting files and projects](03-save-export.html)

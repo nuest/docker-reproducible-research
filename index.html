@@ -15,6 +15,7 @@
 <li><a href="01-rstudio-in-container.html">RStudio</a></li>
 <li><a href="02-jupyter-in-container.html">Jupyter</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
+<li><a href="06-dockerfile.html">Dockerfile</a></li>
 <li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
 </ul>
 
@@ -24,7 +25,8 @@
 <h1>Author Carpentry : Docker for reproducible research</h1>
 
 <p>Reproducibility of computational results is crucial in modern algorithm-based research.
-In this lesson, we introduce Docker as a useful tool to (a) document your computational environment, and (b) make a computational environment transferable across machines and thus archivable.</p>
+In this lesson, we introduce Docker as a useful tool to (a) document your computational environment, and (b) make a computational environment transferable across machines and thus archivable.
+The intention of this course is to showcase Docker as a useful tool for scientists, even if they are <em>not</em> regular users of the command line, which this course is completely based on.</p>
 
 <p><em>Content Contributors: Daniel N&uuml;st</em></p>
 
@@ -39,6 +41,7 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 <li>RStudio in a container</li>
 <li>Jupyter Notebook in a container</li>
 <li>Archival of software and runtime environments with Docker</li>
+<li>Creating reproducible runtime environments from manifests</li>
 </ul>
 
 <h2>Topics:</h2>
@@ -48,11 +51,13 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 <li><a href="01-rstudio-in-container.html">RStudio in a Docker container</a></li>
 <li><a href="02-jupyter-in-container.html">Jupyter in a Docker container</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer and archive of containers</a></li>
+<li><a href="06-dockerfile.html">Create an image from a Dockerfile</a></li>
 </ol>
 
 <h3>Optional</h3>
 
 <ul>
+<li><a href="05-templates.html">Templates for reproducible research</a></li>
 <li><a href="04-geocontainers.html">More geospatial tools in containers</a></li>
 </ul>
 
@@ -62,6 +67,14 @@ In this lesson, we introduce Docker as a useful tool to (a) document your comput
 Data files for the lesson are available here: 
 -->
 
+<h2>Scope of this lesson</h2>
+
+<p>This lesson provides a rather <em>&ldquo;raw and manual&rdquo;</em> approach to creating reproducible packages of data, code, and the required runtime environment.
+Making this potentially tedious process more comfortable and ideally automatic for users is an active field of research, see for example the <a href="http://dx.doi.org/10.1045/january2017-nuest">Executable Research Compendium</a> by the <a href="http://o2r.info">o2r project</a>, and tools such as <a href="http://reprozip.org/">ReproZip</a>.
+Naturally understanding in depth how reproducibility can be achieved provides a clear advantage over simply using a white box (the existing tools are all open, so there is no black box).
+Therefore this lesson&rsquo;s contents on concepts or containerization/virtualization and the leading open source tool are surely worth knowing, even when using supporting tools and services.
+This also makes this topic suitable for a generic audience interested in Author Carpentry.</p>
+
 <h2>Requirements</h2>
 
 <p>Author Carpentry&rsquo;s teaching is hands-on, so participants are encouraged to use their own computers to insure the proper setup of tools for an efficient workflow.
@@ -70,9 +83,9 @@ To most effectively use these materials, please make sure to install everything 
 
 <ul>
 <li><a href="https://www.docker.com/get-docker">Docker</a></li>
-<li>editor with highlighting for Dockerfiles, e.g. <a href="https://code.visualstudio.com/">vscode</a>.</li>
-<li><a href="https://hub.docker.com/register/">Docker ID</a> for an account on <a href="https://hub.docker.com/">Docker Hub</a></li>
-<li><a href="https://github.com/join">GitHub account</a></li>
+<li>editor with highlighting, e.g. <a href="https://code.visualstudio.com/">vscode</a>
+<!-- - [Docker ID](https://hub.docker.com/register/) for an account on [Docker Hub](https://hub.docker.com/) -->
+<!-- - [GitHub account](https://github.com/join) --></li>
 </ul>
 
 </section>

@@ -1,22 +1,29 @@
----
-layout: lesson
-root: .
-title: Transfering and archiving Docker containers
-minutes: 10
----
+#  Transfering and archiving Docker containers
 
-# Learning Objectives
+10 Minutes
 
-* Publish image to Docker Hub
+---------------------------------------------------
+
+## Learning Objectives
+
 * Save an image and export a container
+* Add metadata to containers and images
 * Upload to Zenodo
-* Create an automated build from GitHub
 
 ----------------------------------------------------
 
-# Lesson
+## Recap: Image vs. container
 
-...
+## Save a Docker image
+
+## Export a container
+
+## Image and container labels
+
+## Archiving a Docker image or container
+
+## Loading and importing images and containers
+
 
 <!--
 Previous: [Scripts](02-scripts.html) Optional Next: [Services in OpenRefine](04-services.html)

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author Carpentry</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header>
+<a href="http://authorcarpentry.github.io"><img src="img/AClogo.jpg" alt="Author Carpentry logo"></a>
+</header>
+<nav>
+<ul>
+<li><a href=".">Lesson</a></li>
+<li><a href="00-getting-started.html">Getting started</a></li>
+<li><a href="01-rstudio-in-container.html">RStudio</a></li>
+<li><a href="02-jupyter-in-container.html">Jupyter</a></li>
+<li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
+<li><a href="06-dockerfile.html">Dockerfile</a></li>
+<li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
+</ul>
+
+</nav>
+
+<section>
+<h1>Templates for reproducible research</h1>
+
+<p>15 Minutes</p>
+
+<hr />
+
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>What are Dockerfiles?</li>
+</ul>
+
+<hr />
+
+<h2>Writing a Dockerfile</h2>
+
+<p>Docker can build images based on the instructions from a Dockerfile.
+The instructions can be used for example to run arbitrary commands in the container and to copy files.
+Images can extend on existing images.</p>
+
+<p>Create a new text file named <code>Dockerfile</code> in a temporarly directory.</p>
+
+<pre><code class="language-bash">cd /tmp/authorcarpentry-docker/
+touch Dockerfile
+</code></pre>
+
+<p>Open it with a text editor and paste the following content</p>
+
+<pre><code class="language-Dockerfile">FROM rocker/rstudio
+
+WORKDIR /home/rstudio
+COPY articles.csv articles.csv
+
+RUN install2.r wordcloud tm
+</code></pre>
+
+<p>We use Rocker&rsquo;s RStudio as the base image and copy the file <code>articles.csv</code> into the container to the directory <code>/data</code>.</p>
+
+<p>Now we must tell Docker to create an image.</p>
+
+<pre><code class="language-bash">docker build --tag authorcarpentry-docker-articles .
+</code></pre>
+
+<p>We use the tag <code>authorcarpentry-docker-articles</code> to be able to identify the image.</p>
+
+<p>No start the image as usual and open the file in RStudio (go to <a href="http://localhost:8787">http://localhost:8787</a> &gt; File &gt; Open File).</p>
+
+<pre><code class="language-bash">docker run -it -p 8787:8787 authorcarpentry-docker-articles
+</code></pre>
+
+<p>Now you can load and work with the data in R. Analysis example is based on <a href="https://www.r-bloggers.com/building-wordclouds-in-r/">https://www.r-bloggers.com/building-wordclouds-in-r/</a>.</p>
+
+<pre><code class="language-R">data &lt;- read.csv(&quot;articles.csv&quot;)
+head(data)
+
+library(wordcloud); library(tm)
+
+titles &lt;- VCorpus(VectorSource(data$Title))
+titles &lt;- tm_map(titles, PlainTextDocument)
+wordcloud(titles)
+</code></pre>
+
+<p>You can learn all about <a href="https://docs.docker.com/engine/reference/builder/">Dockerfiles in the Docker docs</a>.</p>
+
+<p><em>How is this useful for reproducible research?</em></p>
+
+<p>You can create images tailored to your use case in a transparent way.
+If Docker every disappears, at least you will have all the instructions you originally used to create the image.</p>
+
+<!--
+Previous: [Saving and Exporting files and projects](03-save-export.html)
+-->
+
+</section>
+
+<footer>
+<span>&copy; 2017 <a href="http://library.caltech.edu/CLS_Copyright.htm">Caltech Library</a></span>
+<address>1200 E California Blvd, Mail Code 2-32, Pasadena, CA 91125-3200</address>
+<span><a href="mailto:library@caltech.edu">Email Us</a></span> 
+<span>Phone: <a href="tel:+1-626-395-3405">(626)395-3405</a></span>
+</footer>
+</body>
+</html>

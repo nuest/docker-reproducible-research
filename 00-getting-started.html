@@ -15,6 +15,7 @@
 <li><a href="01-rstudio-in-container.html">RStudio</a></li>
 <li><a href="02-jupyter-in-container.html">Jupyter</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
+<li><a href="06-dockerfile.html">Dockerfile</a></li>
 <li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
 </ul>
 
@@ -23,7 +24,7 @@
 <section>
 <h1>Getting started with Docker</h1>
 
-<p>5 Minutes</p>
+<p>10 Minutes</p>
 
 <hr />
 
@@ -37,17 +38,151 @@
 
 <hr />
 
-<h2>Start your first container</h2>
+<h2>Start your first containers</h2>
 
-<p>&hellip;</p>
+<p>Open a command line interface (CLI), sometimes also called &ldquo;terminal&rdquo; or &ldquo;shell&rdquo;.</p>
+
+<p>Then type in the following command:</p>
+
+<pre><code class="language-bash">$ docker run hello-world
+</code></pre>
+
+<p>That&rsquo;s it! You just ran a container on your computer.
+In this case, your computer as the container&rsquo;s &ldquo;host&rdquo; maschine.
+The container simply put out a message to the console.</p>
+
+<p>Let&rsquo;s try out the suggested &ldquo;more ambitious&rdquo; command:</p>
+
+<pre><code class="language-bash">$ docker run -it ubuntu bash
+</code></pre>
+
+<p>In this case, you just started a container running the Ubuntu Linux distribution.</p>
+
+<p>The Docker command we just use has four parts:</p>
+
+<ul>
+<li><code>run</code> is Docker&rsquo;s instruction to create and start a container</li>
+<li><code>-it</code> attached an <code>i</code>interactive <code>t</code>erminal - this way we can enter more commands and see their output</li>
+<li><code>ubuntu</code> is the image name the container is based on</li>
+<li><code>bash</code> is the command that is run inside the container, in this case the <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bourne Again Shell</a>, so you are in a CLI session within a container.</li>
+</ul>
+
+<p>We can leave the container session with</p>
+
+<pre><code class="language-bash">root@46f5943a6c2e:/# exit
+</code></pre>
+
+<p><em>How is this useful for reproducible computational research?</em></p>
+
+<p>The image was automatically downloaded from the default registry of images, the <a href="https://hub.docker.com">Docker Hub</a>.
+You can also load images from local files or from an image registry hosted by other organisations.</p>
+
+<p>The name <code>ubuntu</code> was automatically extended with the default tag <code>latest</code>.
+<em>Tags</em> are a mechanism to give names to variants of images.
+For Ubuntu, there are tags for current and old releases of the operating system.
+So for reproducibility, we should explicitly name the release we want.</p>
+
+<pre><code class="language-bash"># older OS
+$ docker run -it ubuntu:10.04 bash
+root@29fdfea48a9f:/# cat /etc/*release
+exit
+
+# newer OS
+$ docker run -it ubuntu:17.04 bash
+root@1a7f5a3619a8:/# cat /etc/*release
+exit
+</code></pre>
+
+<p>Docker let&rsquo;s us work with outdated or new/unstable noperating system versions easily.</p>
+
+<p>This can be extended to versions of software libraries and even particular combinations of libraries needed for a specific analysis, see e.g. <a href="http://dx.doi.org/10.3390/rs9030290">this paper</a>.</p>
+
+<p>You can find out more on the <a href="https://docs.docker.com/engine/reference/run/"><code>run</code> command in the Docker docs</a>.</p>
+
+<!-- remove all exited containers: docker rm $(docker ps -q -f status=exited) -->
 
 <h2>Image vs. container</h2>
 
-<p>&hellip;</p>
+<p>An image is a binary file encapsualating a complete &ldquo;operating system&rdquo;.
+When you tell the Docker engine to start a new container, the image is the blueprint for it.
+You can run multiple containers from the same image.
+A container can then be stopped and restarted again.
+Since the container can change its own state while it is running (e.g. change a file) and diverge from its original state based on the image.
+Whenever a file is changed within the container, a new copy of the file is created to not change the original one in the image (<em>&ldquo;copy-on-write&rdquo; strategy</em>).</p>
 
-<h2>Docker CLI help</h2>
+<p>You can learn more about <a href="https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/">images, containers and storage in the Docker docs</a>.</p>
 
-<p>&hellip;</p>
+<p><em>How is this useful for reproducible computational research?</em></p>
+
+<p>We can save and share both images and containers, so capture a specific state of the runtime environment that is independent from the host maschine.
+For reproducibility, images are more interesting, since they are based on a human readable manifest for their contents, which we will introduce in a later section of this course.</p>
+
+<h2>Managing local images</h2>
+
+<p>When you work with Docker a little while, you will download a variety of images.
+These might capture disk space on your computer, so it is good to know how to manage them.</p>
+
+<pre><code class="language-bash"># list images
+docker images
+
+# remove image by name and tag
+docker rmi ubuntu:10.04
+</code></pre>
+
+<p>You can learn more about the <a href="https://docs.docker.com/engine/reference/commandline/images/"><code>images</code> command in the Docker docs</a>.</p>
+
+<h2>Managing local containers</h2>
+
+<p>You can run multiple containers in parallel, if you like.
+To keep an eye on the resources they use, you can list and control them with the following commands.</p>
+
+<pre><code class="language-bash">docker ps
+
+# list also the previously running containers, which are now stopped
+docker ps -a
+
+# remove a container, e.g. to re-use its name
+docker rm &lt;containerid or name&gt;
+</code></pre>
+
+<h2>Docker CLI command completion and help</h2>
+
+<p>In this tutorial, we used only the command line to control Docker containers.
+This is advantageous over using a graphical user interface, because you can include the commands in the scripts, and it is faster because you don&rsquo;t have to type the whole command and avoid typos.</p>
+
+<p>Type <code>docker</code> into the terminal and double-press the <code>TAB</code> key.
+You see a long list of available commands, only a few of which we will use in this course.</p>
+
+<p>The online Docker documentation is extensive, and there are a vast number of tutorials on using Docker.
+However, to use Docker effectively, it is best to get acquainted with the build-in help:
+appending <code>--help</code> to any Docker command will list the available options and can answer usage questions in 80% of the cases.</p>
+
+<p>Take a look at the help of commands we have already used.</p>
+
+<pre><code class="language-bash">docker run --help
+docker images --help
+docker rmi --help
+docker ps --help
+
+# get help on the commands with
+docker --help
+</code></pre>
+
+<h2>More information on Docker</h2>
+
+<p>Docker is not intended for reproducible research, but the intention of packaging an application with all its dependencies much overlap with reproduction of computations.</p>
+
+<p>Docker has been called <em>&ldquo;lightweight virtualization&rdquo;</em>, but that requires an understanding of virtual machines.
+A better image is the one of</p>
+
+<p>In this lesson we&rsquo;re only using a fraction of what Docker offers, but it is woth exploring the <a href="https://www.doLearncker.com/what-docker">original use cases</a> of Docker.
+Try to learn some more on the large number of Docker commands using the build-in help of the CLI.</p>
+
+<pre><code class="language-bash">~$ docker &lt;TAB TAB&gt;
+attach   cp       diff     export   images   inspect  login    network  ps       rename   rmi      search   stop     unpause  volume
+build    create   events   help     import   kill     logout   pause    pull     restart  run      start    tag      update   wait
+commit   daemon   exec     history  info     load     logs     port     push     rm       save     stats    top      version
+</code></pre>
 
 <!--
 Next: [Working with OpenRefine](01-working-with-openrefine.html)
