@@ -1,6 +1,9 @@
 Author Carpentry : Docker for reproducible research
 =======
 
+<div style="color: #ff1111;">
+<strong>This course uses the Author Carpentry template but is not an Author Carpentry lesson yet!</strong> Find out more on the progress of this project at <strong><a href="https://github.com/AuthorCarpentry/planning/issues/3">https://github.com/AuthorCarpentry/planning/issues/3</a></strong>.</div>
+
 Reproducibility of computational results is crucial in modern algorithm-based research.
 In this lesson, we introduce Docker as a useful tool to (a) document your computational environment, and (b) make a computational environment transferable across machines and thus archivable.
 The intention of this course is to showcase Docker as a useful tool for scientists, even if they are _not_ regular users of the command line, which this course is completely based on.
