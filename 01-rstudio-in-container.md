@@ -80,6 +80,7 @@ You can leave the R session just as a regular R session by typing `quit()`.
 
 ## More resources on Docker and R
 
+- [_R Docker tutorial_](https://ropenscilabs.github.io/r-docker-tutorial/) by ROpenSci
 - [_Investigating Docker and R_](http://o2r.info/2016/12/15/investigating-docker-and-R/) by the o2r project team (blog post)
 - [_Reproducible Research using Docker and R_](https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#1) by B.Marwick (presentation slides)
 - [_An introduction to Docker for reproducible research_](https://doi.org/10.1145/2723872.2723882) by Carl Boettiger (research article)
