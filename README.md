@@ -52,10 +52,21 @@ This also makes this topic suitable for a generic audience interested in Author 
 ## Requirements
 
 Author Carpentry's teaching is hands-on, so participants are encouraged to use their own computers to insure the proper setup of tools for an efficient workflow.
-*These lessons assume no prior knowledge of the skills or tools*, but working through this lesson requires working copies of the software described below.
-To most effectively use these materials, please make sure to install everything *before* working through this lesson.                    
+*These lessons assume no prior knowledge of the skills or tools*, but working through this lesson requires working installations of the software described below.
+To most effectively use these materials, please make sure to install everything *before* working through this lesson.
 
 - [Docker](https://www.docker.com/get-docker)
-- editor with highlighting, e.g. [vscode](https://code.visualstudio.com/)
+- editor with highlighting for `Dockerfile`s, e.g. [vscode](https://code.visualstudio.com/) (_use this if you have no preference_), [Atom](https://atom.io/packages/language-docker) or [Sublime](https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting), or even [Vim](http://softwaretester.info/vim-syntax-highlighting-for-dockerfiles/)
 <!-- - [Docker ID](https://hub.docker.com/register/) for an account on [Docker Hub](https://hub.docker.com/) -->
-<!-- - [GitHub account](https://github.com/join) -->
+<!-- - [GitHub account](https://github.com/join/) -->
+<!-- - [Zenodo account](https://zenodo.org/signup/) -->
+
+## Optional requirements
+
+In addition to the software, please bring a piece of your own research in one of the following formats (preferred formats first) _if you have one at hand_.
+This could be your digital notebook, or a section of any analysis script you've been using for a published paper, for example.
+Make sure you can share these files with other course participants, i.e. also bring required data, remove information with privacy issues, and potentially make an excerpt of a longer script and make sure it still runs.
+
+- RMarkdown (`.Rmd`)
+- R script (`.R`)
+- Python script (`.py`)
