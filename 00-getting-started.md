@@ -147,12 +147,28 @@ docker ps --help
 docker --help
 ```
 
+## The most important commands
+
+ **Command** | **Explanation** 
+ ----- | -----
+`docker ps` | list all the running containers on the host
+`docker ps -a` | list all the containers on the host, including those that have stopped
+`docker exec -it <container-id> bash` | opens bash shell for a currently running container
+`docker stop <container-id>` | stop a running container
+`docker kill <container-id>` | force stop a running container
+`docker rm <container-id>` | removes (deletes) a container
+`docker rmi <container-id>` | removes (deletes) an image
+`docker rm -f $(docker ps -a -q)` | remove _all_ current containers
+`docker rmi -f $(docker images -q)` | remove _all_ images, even those not in use
+
+[source](https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#11)
+
 ## More information on Docker
 
 Docker is not intended for reproducible research, but the intention of packaging an application with all its dependencies much overlap with reproduction of computations.
 
 Docker has been called _"lightweight virtualization"_, but that requires an understanding of virtual machines.
-A better image is the one of 
+A better image is the one of _houses vs. appartments_. With a house, you "own" and control everything, but in an apartment you only control what is inside your appartment, but have some shared infrastructure outside of your apartment.
 
 In this lesson we're only using a fraction of what Docker offers, but it is woth exploring the [original use cases](https://www.doLearncker.com/what-docker) of Docker.
 Try to learn some more on the large number of Docker commands using the build-in help of the CLI.

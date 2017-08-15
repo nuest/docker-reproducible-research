@@ -1,0 +1,23 @@
+---
+# Based on https://docs.docker.com/registry/deploying/#deploy-your-registry-using-a-compose-file
+# See also https://github.com/kwk/docker-registry-frontend/blob/v2/example-setup/docker-compose.yml
+registry:
+  restart: always
+  image: registry:2
+  ports:
+    - 5000:5000
+  environment:
+    #REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+    #REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    # set up pull-through cache, see https://docs.docker.com/registry/recipes/mirror/#run-a-registry-as-a-pull-through-cache
+    REGISTRY_PROXY_REMOTEURL: https://registry-1.docker.io
+    REGISTRY_STORAGE_DELETE_ENABLED: "true"
+    #REGISTRY_LOG_LEVEL: debug
+    #REGISTRY_AUTH: htpasswd
+    #REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    #REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+  volumes:
+    - ~/local-docker-registry:/var/lib/registry:rw
+    #- ./certs:/certs
+    #- /path/auth:/auth
+

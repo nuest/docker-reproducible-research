@@ -5,5 +5,5 @@
 + [Jupyter](02-jupyter-in-container.html)
 + [Transfer & Archive](03-transfer-and-archive.html)
 + [Dockerfile](06-dockerfile.html)
-+ [Contact Us](mailto:authorcarpentry@library.caltech.edu)
++ [Contact Us](mailto:daniel.nuest@uni-muenster.de)
 

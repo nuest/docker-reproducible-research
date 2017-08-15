@@ -16,7 +16,7 @@
 <li><a href="02-jupyter-in-container.html">Jupyter</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
 <li><a href="06-dockerfile.html">Dockerfile</a></li>
-<li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
+<li><a href="mailto:daniel.nuest@uni-muenster.de">Contact Us</a></li>
 </ul>
 
 </nav>
@@ -91,6 +91,61 @@ wordcloud(titles)
 <p>You can create images tailored to your use case in a transparent way.
 If Docker every disappears, at least you will have all the instructions you originally used to create the image.</p>
 
+<h2>Common Dockerfile elements</h2>
+
+<table>
+<thead>
+<tr>
+<th><strong>Command</strong></th>
+<th><strong>Explanation</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>FROM</code></td>
+<td>specifies which base image, or stack of base images, your image is built on</td>
+</tr>
+
+<tr>
+<td><code>MAINTAINER</code></td>
+<td>specifies who created and maintains the image.</td>
+</tr>
+
+<tr>
+<td><code>CMD</code></td>
+<td>specifies the command to run immediately when a container is started from this image, unless you specify a different command.</td>
+</tr>
+
+<tr>
+<td><code>COPY</code></td>
+<td>will copy new files from a source and add them to the containers filesystem path</td>
+</tr>
+
+<tr>
+<td><code>WORKDIR</code></td>
+<td>sets the current directory for <code>RUN</code> and <code>COPY</code> statements (preferred over using <code>RUN cd ..</code>)</td>
+</tr>
+
+<tr>
+<td><code>RUN</code></td>
+<td>does just that: It runs a command inside the container (eg. <code>apt-get</code>)</td>
+</tr>
+
+<tr>
+<td><code>EXPOSE</code></td>
+<td>tells Docker that the container will listen on the specified port when it starts and the host may bind these</td>
+</tr>
+
+<tr>
+<td><code>VOLUME</code></td>
+<td>will create a mount point with the specified name and tell Docker that the volume may be mounted by the host</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#14">based on</a></p>
+
 <!--
 Previous: [Saving and Exporting files and projects](03-save-export.html)
 -->
@@ -98,10 +153,15 @@ Previous: [Saving and Exporting files and projects](03-save-export.html)
 </section>
 
 <footer>
+
+<span>&copy; 2017 <a href="https://nordholmen.net">Daniel N&uuml;st</a></span>
+<!-- original footer, removed by DN
 <span>&copy; 2017 <a href="http://library.caltech.edu/CLS_Copyright.htm">Caltech Library</a></span>
 <address>1200 E California Blvd, Mail Code 2-32, Pasadena, CA 91125-3200</address>
 <span><a href="mailto:library@caltech.edu">Email Us</a></span> 
 <span>Phone: <a href="tel:+1-626-395-3405">(626)395-3405</a></span>
+-->
+
 </footer>
 </body>
 </html>

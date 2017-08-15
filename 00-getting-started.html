@@ -16,7 +16,7 @@
 <li><a href="02-jupyter-in-container.html">Jupyter</a></li>
 <li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
 <li><a href="06-dockerfile.html">Dockerfile</a></li>
-<li><a href="mailto:authorcarpentry@library.caltech.edu">Contact Us</a></li>
+<li><a href="mailto:daniel.nuest@uni-muenster.de">Contact Us</a></li>
 </ul>
 
 </nav>
@@ -168,12 +168,72 @@ docker ps --help
 docker --help
 </code></pre>
 
+<h2>The most important commands</h2>
+
+<table>
+<thead>
+<tr>
+<th><strong>Command</strong></th>
+<th><strong>Explanation</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>docker ps</code></td>
+<td>list all the running containers on the host</td>
+</tr>
+
+<tr>
+<td><code>docker ps -a</code></td>
+<td>list all the containers on the host, including those that have stopped</td>
+</tr>
+
+<tr>
+<td><code>docker exec -it &lt;container-id&gt; bash</code></td>
+<td>opens bash shell for a currently running container</td>
+</tr>
+
+<tr>
+<td><code>docker stop &lt;container-id&gt;</code></td>
+<td>stop a running container</td>
+</tr>
+
+<tr>
+<td><code>docker kill &lt;container-id&gt;</code></td>
+<td>force stop a running container</td>
+</tr>
+
+<tr>
+<td><code>docker rm &lt;container-id&gt;</code></td>
+<td>removes (deletes) a container</td>
+</tr>
+
+<tr>
+<td><code>docker rmi &lt;container-id&gt;</code></td>
+<td>removes (deletes) an image</td>
+</tr>
+
+<tr>
+<td><code>docker rm -f $(docker ps -a -q)</code></td>
+<td>remove <em>all</em> current containers</td>
+</tr>
+
+<tr>
+<td><code>docker rmi -f $(docker images -q)</code></td>
+<td>remove <em>all</em> images, even those not in use</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#11">source</a></p>
+
 <h2>More information on Docker</h2>
 
 <p>Docker is not intended for reproducible research, but the intention of packaging an application with all its dependencies much overlap with reproduction of computations.</p>
 
 <p>Docker has been called <em>&ldquo;lightweight virtualization&rdquo;</em>, but that requires an understanding of virtual machines.
-A better image is the one of</p>
+A better image is the one of <em>houses vs. appartments</em>. With a house, you &ldquo;own&rdquo; and control everything, but in an apartment you only control what is inside your appartment, but have some shared infrastructure outside of your apartment.</p>
 
 <p>In this lesson we&rsquo;re only using a fraction of what Docker offers, but it is woth exploring the <a href="https://www.doLearncker.com/what-docker">original use cases</a> of Docker.
 Try to learn some more on the large number of Docker commands using the build-in help of the CLI.</p>
@@ -191,10 +251,15 @@ Next: [Working with OpenRefine](01-working-with-openrefine.html)
 </section>
 
 <footer>
+
+<span>&copy; 2017 <a href="https://nordholmen.net">Daniel N&uuml;st</a></span>
+<!-- original footer, removed by DN
 <span>&copy; 2017 <a href="http://library.caltech.edu/CLS_Copyright.htm">Caltech Library</a></span>
 <address>1200 E California Blvd, Mail Code 2-32, Pasadena, CA 91125-3200</address>
 <span><a href="mailto:library@caltech.edu">Email Us</a></span> 
 <span>Phone: <a href="tel:+1-626-395-3405">(626)395-3405</a></span>
+-->
+
 </footer>
 </body>
 </html>

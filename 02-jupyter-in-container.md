@@ -2,13 +2,16 @@
 
 10 Minutes
 
-
 ---------------------------------------------------
 
 ## Learning Objectives
 
 * User Jupyter Notebook started in a Docker container
 * Share a local directory with running container for data import and export
+
+----------------------------------------------------
+
+This section assumes you have completed the "RStudio" section and have downloaded the file `articles.csv`.
 
 ----------------------------------------------------
 

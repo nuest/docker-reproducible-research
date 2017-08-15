@@ -70,6 +70,21 @@ _How is this useful for reproducible research?_
 You can create images tailored to your use case in a transparent way.
 If Docker every disappears, at least you will have all the instructions you originally used to create the image.
 
+## Common Dockerfile elements
+
+ **Command** | **Explanation** 
+ ----- | -----
+`FROM` | specifies which base image, or stack of base images, your image is built on
+`MAINTAINER` | specifies who created and maintains the image.
+`CMD` | specifies the command to run immediately when a container is started from this image, unless you specify a different command.
+`COPY` | will copy new files from a source and add them to the containers filesystem path
+`WORKDIR` | sets the current directory for `RUN` and `COPY` statements (preferred over using `RUN cd ..`)
+`RUN` | does just that: It runs a command inside the container (eg. `apt-get`)
+`EXPOSE` | tells Docker that the container will listen on the specified port when it starts and the host may bind these
+`VOLUME` | will create a mount point with the specified name and tell Docker that the volume may be mounted by the host
+
+[based on](https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#14)
+
 <!--
 Previous: [Saving and Exporting files and projects](03-save-export.html)
 -->

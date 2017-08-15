@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author Carpentry</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header>
+<a href="http://authorcarpentry.github.io"><img src="img/AClogo.jpg" alt="Author Carpentry logo"></a>
+</header>
+<nav>
+<ul>
+<li><a href=".">Lesson</a></li>
+<li><a href="00-getting-started.html">Getting started</a></li>
+<li><a href="01-rstudio-in-container.html">RStudio</a></li>
+<li><a href="02-jupyter-in-container.html">Jupyter</a></li>
+<li><a href="03-transfer-and-archive.html">Transfer &amp; Archive</a></li>
+<li><a href="06-dockerfile.html">Dockerfile</a></li>
+<li><a href="mailto:daniel.nuest@uni-muenster.de">Contact Us</a></li>
+</ul>
+
+</nav>
+
+<section>
+<h1>Running a local Docker Registry</h1>
+
+<p>If you give a course on Docker, and 30 people run the same Docker pull command at the same time, it is a challenge for even the best university networks to handle. Therefore it could be useful to run a local Docker registry. It certainly adds some complexity in the beginning, but is very useful for courses using domain specific images (and not just <code>hello-world</code>).</p>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://docs.docker.com/registry/recipes/mirror/#what-if-the-content-changes-on-the-hub">https://docs.docker.com/registry/recipes/mirror/#what-if-the-content-changes-on-the-hub</a> (run the registry as a pull-through cache)</li>
+<li><a href="https://docs.docker.com/registry/insecure/">https://docs.docker.com/registry/insecure/</a> (running a self-signed or insecure registry, the former should be fine for most courses)</li>
+<li><a href="https://rominirani.com/docker-tutorial-series-part-6-docker-private-registry-15d1fd899255">https://rominirani.com/docker-tutorial-series-part-6-docker-private-registry-15d1fd899255</a></li>
+</ul>
+
+<h2>Setting up the registry as a plain HTTP registry</h2>
+
+<pre><code class="language-bash">cd registry
+docker-compose up
+</code></pre>
+
+<p>Ask the course participants to follow the instructions here:</p>
+
+<p><a href="https://docs.docker.com/registry/insecure/#deploying-a-plain-http-registry">https://docs.docker.com/registry/insecure/#deploying-a-plain-http-registry</a></p>
+
+<p>to add your local computer&rsquo;s IP and the respective port to the list of insecure registries, e.g.</p>
+
+<pre><code class="language-json">{
+  &quot;insecure-registries&quot; : [&quot;my-laptop:5000&quot;,&quot;1.2.3.4:5000&quot;]
+}
+</code></pre>
+
+<p>Don&rsquo;t forget to restart the Docker daemon afterwards (<code>sudo service docker restart</code>, or the equivalent on the respective platform).</p>
+
+<p>You can browse a list of available images at <strong>http://[my-laptop]:5000/v2/_catalog</strong>.</p>
+
+<p>For <strong>Docker toolbox</strong>:</p>
+
+<p>Create a new machine with <code>docker-machine</code> which enables the insecure registry and enable it.</p>
+
+<pre><code class="language-bash">docker-machine create --driver virtualbox --engine-insecure-registry my-laptop:5000 authorcarpentry
+eval $(docker-machine env authorcarpentry)
+</code></pre>
+
+<p>Alternatively, try the solution <a href="https://github.com/docker/docker-registry/issues/1005#issuecomment-154815402">suggested here</a> to update an existing machine.
+Adjust this line in <code>/var/lib/boot2docker/profile</code> in the VirtualBox machine:</p>
+
+<pre><code>--insecure-registry &lt;the hostname or IP, e.g. 192.168.99.100&gt;:5000
+</code></pre>
+
+<h2>Adding images</h2>
+
+<p>You can now &ldquo;fill&rdquo; the registry by pulling images. This will add a few GB to your local disc!</p>
+
+<p><strong>Important:</strong> Run these commands by using the IP or hostname that the students will also use - it makes instructions much clearer!</p>
+
+<h3>Popular images in Docker Hub</h3>
+
+<pre><code>docker pull [my-laptop]:5000/library/alpine
+docker pull [my-laptop]:5000/library/busybox
+docker pull [my-laptop]:5000/library/centos
+docker pull [my-laptop]:5000/library/centos:6
+docker pull [my-laptop]:5000/library/debian
+docker pull [my-laptop]:5000/library/debian:jessie
+docker pull [my-laptop]:5000/library/debian:stretch
+docker pull [my-laptop]:5000/library/debian:wheezy
+docker pull [my-laptop]:5000/library/hello-world
+docker pull [my-laptop]:5000/library/httpd
+docker pull [my-laptop]:5000/library/httpd:alpine
+docker pull [my-laptop]:5000/library/mariadb
+docker pull [my-laptop]:5000/library/mariadb:5
+docker pull [my-laptop]:5000/library/mongo
+docker pull [my-laptop]:5000/library/mysql
+docker pull [my-laptop]:5000/library/nginx
+docker pull [my-laptop]:5000/library/nginx:alpine
+docker pull [my-laptop]:5000/library/owncloud
+docker pull [my-laptop]:5000/library/postgres
+docker pull [my-laptop]:5000/library/postgres:alpine
+docker pull [my-laptop]:5000/library/python
+docker pull [my-laptop]:5000/library/python:2
+docker pull [my-laptop]:5000/library/python:2-alpine
+docker pull [my-laptop]:5000/library/python:alpine
+docker pull [my-laptop]:5000/library/python:slim
+docker pull [my-laptop]:5000/library/redis
+docker pull [my-laptop]:5000/library/ubuntu
+docker pull [my-laptop]:5000/library/ubuntu:14.04
+docker pull [my-laptop]:5000/library/ubuntu:17.04
+docker pull [my-laptop]:5000/library/ubuntu:trusty
+docker pull [my-laptop]:5000/library/ubuntu:xenial
+docker pull [my-laptop]:5000/library/ubuntu:zesty
+docker pull [my-laptop]:5000/library/wordpress
+docker pull [my-laptop]:5000/ubuntu
+</code></pre>
+
+<h3>R Images</h3>
+
+<pre><code class="language-bash"># Rocker
+docker pull [my-laptop]:5000/rocker/r-ver
+docker pull [my-laptop]:5000/rocker/r-ver:3.1.0
+docker pull [my-laptop]:5000/rocker/r-ver:3.3.0
+docker pull [my-laptop]:5000/rocker/r-ver:3.3.1
+docker pull [my-laptop]:5000/rocker/r-ver:3.3.3
+docker pull [my-laptop]:5000/rocker/r-ver:3.4.1
+docker pull [my-laptop]:5000/rocker/r-ver:devel
+docker pull [my-laptop]:5000/rocker/rstudio
+docker pull [my-laptop]:5000/rocker/rstudio:3.4.1
+docker pull [my-laptop]:5000/rocker/rstudio:devel
+docker pull [my-laptop]:5000/rocker/tidyverse
+docker pull [my-laptop]:5000/rocker/tidyverse:3.4.1
+docker pull [my-laptop]:5000/rocker/verse
+docker pull [my-laptop]:5000/rocker/verse:3.4.1
+docker pull [my-laptop]:5000/rocker/verse:3.4.1
+docker pull [my-laptop]:5000/rocker/geospatial:3.4.1
+
+# MRO and Renjin
+docker pull [my-laptop]:5000/nuest/mro
+docker pull [my-laptop]:5000/nuest/mro:3.4.1
+docker pull [my-laptop]:5000/nuest/renjin
+</code></pre>
+
+<h3>Geospatial images</h3>
+
+<p>Based on list <a href="https://wiki.osgeo.org/wiki/DockerImages">https://wiki.osgeo.org/wiki/DockerImages</a>.</p>
+
+<pre><code class="language-bash">rocker/geospatial
+
+kartoza/postgis
+# https://github.com/kartoza/docker-qgis-desktop#example-use-with-docker-compose
+kartoza/qgis-desktop
+kartoza/qgis-desktop:2.18
+kartoza/qgis-desktop:2.14
+kartoza/qgis-desktop:2.12
+kartoza/qgis-desktop:2.10
+# https://github.com/kartoza/docker-qgis-server#example-use-with-docker-compose
+kartoza/qgis-server
+kartoza/qgis-server:2.18
+kartoza/qgis-server:2.14
+kartoza/qgis-server:LTR
+
+# https://github.com/geo-data/gdal-docker
+geodata/gdal
+# https://github.com/geo-data/grass-docker
+docker run geodata/grass --help
+# 
+geodata/mapserver
+
+# https://github.com/sverhoeven/docker-cartodb#how-to-run-the-container (full stack!)
+sverhoeven/cartodb
+
+# https://github.com/geonetwork/docker-geonetwork and https://hub.docker.com/_/geonetwork/
+library/geonetwork
+library/geonetwork:postgres
+
+geocontainers/pycsw
+geocontainers/52n-wps
+
+# https://github.com/DCAL12/docker-python-geospatial
+dcal12/python-geospatial
+</code></pre>
+
+<h3>Maintenance</h3>
+
+<p>Check the size with <code>du -hs /tmp/local-docker-registry/docker/registry/v2/*</code> (leave out the <code>s</code> to get each directory).</p>
+
+<p>You can clear your client registry of all these images afterwards with</p>
+
+<pre><code>docker images | grep localhost:5000 | awk '{print $3}' | xargs docker rmi --force
+</code></pre>
+
+<h2>[WIP] Setting up the registry with a self-signed certificate</h2>
+
+<pre><code class="language-bash">$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days 365 -out certs/domain.crt
+</code></pre>
+
+<p>When asked for &ldquo;Common Name (e.g. server FQDN or YOUR name)&rdquo;, put in <em>your IP in the local network</em>, because <code>localhost</code> will only work for your own machine.
+Alternatively, run the following command, which has the data normally queried interactively already included (<a href="https://raymii.org/s/snippets/OpenSSL_generate_CSR_non-interactivemd.html">via</a>). It uses a <a href="https://security.stackexchange.com/a/159537">two</a> <a href="https://askubuntu.com/a/604691/493585">tricks</a> to get your current IP and add it, besides localhost, to the certificate.</p>
+
+<pre><code>MY_IP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}')
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days 365 -batch -subj &quot;/C=DE/ST=Ocean/L=Whale City/O=Docker for RR/OU=Author Carpentry/CN=$(hostname)&quot; -reqexts SAN -config &lt;(cat /etc/ssl/openssl.cnf &lt;(printf &quot;[SAN]\nsubjectAltName=DNS:$MY_IP,DNS:localhost&quot;)) -out certs/domain.crt
+</code></pre>
+
+<p>Note the SHA-256 Fingerprint and tell it to the group if they want to be sure.</p>
+
+<p><strong><a href="https://localhost:5000/v2/_catalog">https://localhost:5000/v2/_catalog</a></strong></p>
+
+<h2>Setting up registry UI</h2>
+
+<p><a href="https://github.com/kwk/docker-registry-frontend">https://github.com/kwk/docker-registry-frontend</a></p>
+
+<p><a href="https://github.com/Joxit/docker-registry-ui">https://github.com/Joxit/docker-registry-ui</a></p>
+
+<h2>Setting up nginx proxy</h2>
+
+<p>only allow specific IPs (local network) to access the registry</p>
+
+<p>could re-use the UI&rsquo;s nginx?</p>
+
+</section>
+
+<footer>
+
+<span>&copy; 2017 <a href="https://nordholmen.net">Daniel N&uuml;st</a></span>
+<!-- original footer, removed by DN
+<span>&copy; 2017 <a href="http://library.caltech.edu/CLS_Copyright.htm">Caltech Library</a></span>
+<address>1200 E California Blvd, Mail Code 2-32, Pasadena, CA 91125-3200</address>
+<span><a href="mailto:library@caltech.edu">Email Us</a></span> 
+<span>Phone: <a href="tel:+1-626-395-3405">(626)395-3405</a></span>
+-->
+
+</footer>
+</body>
+</html>
