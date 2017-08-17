@@ -170,6 +170,13 @@ You can clear your client registry of all these images afterwards with
 docker images | grep localhost:5000 | awk '{print $3}' | xargs docker rmi --force
 ```
 
+### Pushing specific imags manually
+
+```bash
+docker tag my-paper gin-nuest:5000/demo/my-paper
+docker push gin-nuest:5000/demo/my-paper
+```
+
 ## [WIP] Setting up the registry with a self-signed certificate
 
 ```bash

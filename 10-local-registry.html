@@ -188,6 +188,12 @@ dcal12/python-geospatial
 <pre><code>docker images | grep localhost:5000 | awk '{print $3}' | xargs docker rmi --force
 </code></pre>
 
+<h3>Pushing specific imags manually</h3>
+
+<pre><code class="language-bash">docker tag my-paper gin-nuest:5000/demo/my-paper
+docker push gin-nuest:5000/demo/my-paper
+</code></pre>
+
 <h2>[WIP] Setting up the registry with a self-signed certificate</h2>
 
 <pre><code class="language-bash">$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days 365 -out certs/domain.crt

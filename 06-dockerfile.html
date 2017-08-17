@@ -24,7 +24,7 @@
 <section>
 <h1>Templates for reproducible research</h1>
 
-<p>15 Minutes</p>
+<p>30 Minutes</p>
 
 <hr />
 
@@ -32,6 +32,8 @@
 
 <ul>
 <li>What are Dockerfiles?</li>
+<li>What are common commands in Dockerfiles?</li>
+<li>How can a Dockerfile be used to compile a literate programming document?</li>
 </ul>
 
 <hr />
@@ -145,6 +147,103 @@ If Docker every disappears, at least you will have all the instructions you orig
 </table>
 
 <p><a href="https://benmarwick.github.io/UW-eScience-docker-for-reproducible-research/#14">based on</a></p>
+
+<h2>Compiling a literate programming document</h2>
+
+<p>Of course you can do more than just run an R script.
+You can also compile a literate programming document, such as a scientific publication.</p>
+
+<p>Let&rsquo;s start with this example R Markdown document:</p>
+
+<pre><code>---
+title: &quot;Magma Demo&quot;
+output: html_document
+---
+
+This example is based on http://rmarkdown.rstudio.com/lesson-3.html.
+
+```{r include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r message = FALSE, warning = FALSE}
+library(viridis)
+```
+
+The code below demonstrates the Magma palette in the [viridis](https://github.com/sjmgarnier/viridis) package.
+It displays a contour map of the Maunga Whau volcano in Auckland, New Zealand.
+
+## Magma colors
+
+```{r fig.cap = &quot;The Maunga Whau volcano, Auckland.&quot;}
+image(volcano, col = viridis(200, option = &quot;A&quot;))
+```
+
+```{r session}
+sessionInfo()
+```
+</code></pre>
+
+<p>Put this into a file <code>paper.Rmd</code> in a new directory on your computer.</p>
+
+<p>The following <code>Dockerfile</code> starts from a version-fixed Rocker image, installs the required packages, and sets the rendering of the file as the image&rsquo;s default command.
+It also uses <a href="http://label-schema.org/">Label Schema</a> labels to embed the required documentation into the image.
+Put the content of the snippet below into a file <code>Dockerfile</code> next to <code>paper.Rmd</code>.</p>
+
+<pre><code>FROM rocker/r-ver:3.4.1
+
+RUN apt-get update -qq \
+	&amp;&amp; apt-get install -y --no-install-recommends \
+	## Packages required by R extension packages
+	# required by rmarkdown:
+	lmodern \
+	pandoc \
+	&amp;&amp; apt-get clean \
+	&amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# install R extension packages
+RUN install2.r -r &quot;http://cran.rstudio.com&quot; \
+	  rmarkdown \
+	  viridis \
+	  &amp;&amp; rm -rf /tmp/downloaded_packages/ /tmp/*.rd
+
+# add metadata
+LABEL maintainer=&quot;Me! &lt;mail@me.edu&gt;&quot; \
+    org.label-schema.usage=&quot;Run the image, then extract the created document with 'docker cp my-paper-container:/analysis/paper.html paper-from-container.html'&quot; \
+    org.label-schema.docker.cmd=&quot;docker run -it --name my-paper-container imagename&quot; \
+    org.label-schema.name=&quot;Docker for RR Demo&quot; \
+    org.label-schema.schema-version=&quot;1.0&quot;
+
+WORKDIR /analysis
+COPY paper.Rmd paper.Rmd
+
+ENTRYPOINT [&quot;sh&quot;, &quot;-c&quot;]
+CMD [&quot;R --vanilla -e \&quot;rmarkdown::render(input = '/analysis/paper.Rmd', output_format = rmarkdown::html_document())\&quot;&quot;]
+</code></pre>
+
+<p>Build the Dockerfile with <code>docker build --tag my-paper .</code></p>
+
+<p>Run the image with <code>docker run -it --name my-paper-container my-paper</code> and inspect the output on the console.
+We name the container so that we can more easily retrieve files from it.</p>
+
+<p>Extract the created output file with <a href="https://docs.docker.com/engine/reference/commandline/cp/"><code>docker cp</code></a>.</p>
+
+<pre><code class="language-bash">docker cp my-paper-container:/analysis/paper.html paper-from-container.html
+</code></pre>
+
+<p>You will see the following file:</p>
+
+<p><img style="border: 3px solid grey;" alt="Screenshot of created HTML file" src="img/screenshot-rmd-container-output.jpg" /></p>
+
+<p>Open the source code of the HTML document (<code>Ctrl + U</code> in most browses) and inspect it.
+Noteworthy is the &ldquo;embedding&rdquo; of the image data in <code>base64</code>:</p>
+
+<pre><code>&lt;img src=&quot;data:image/png;base64,iVBORw0KGgoAAAAN...
+</code></pre>
+
+<p><em>How is this relevant for research?</em></p>
+
+<p>You can create a controlled environment to test your analysis. You will not miss any installed dependency on your computer which you are not conscious about, because the Dockerfile is a new environment. Archive the image, and you will be able to re-run the analysis anytime, even exchange data or render a different document using the same environment.</p>
 
 <!--
 Previous: [Saving and Exporting files and projects](03-save-export.html)
